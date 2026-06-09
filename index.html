@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강남·서초 신규교사 100일 생존 축하 카드</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        .tab-active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 700;
+        }
+        
+        /* 확실하게 보이는 고성능 꽃가루(Confetti) 스타일 */
+        .confetti {
+            position: fixed;
+            z-index: 9999; /* 화면 최상단 보장 */
+            top: -20px;
+            pointer-events: none; /* 클릭 방해 금지 */
+        }
+        
+        @keyframes fall-and-sway {
+            0% {
+                transform: translateY(0) rotate(0deg) translateX(0);
+                opacity: 1;
+            }
+            33% {
+                transform: translateY(35vh) rotate(120deg) translateX(15px);
+                opacity: 0.9;
+            }
+            66% {
+                transform: translateY(70vh) rotate(240deg) translateX(-15px);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg) translateX(10px);
+                opacity: 0;
+            }
+        }
+
+        .pulse-soft {
+            animation: softPulse 2s infinite;
+        }
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-6 overflow-x-hidden relative">
+    
+    <!-- 배경 장식용 흐릿한 원들 -->
+    <div class="absolute top-10 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40"></div>
+
+    <div class="w-full max-w-2xl bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border border-white/50 z-10">
+        
+        <!-- 헤더 영역 -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-3">
+                🎉 Gangnam-Seocho No.1 Survival
+            </span>
+            <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2">
+                신규 선생님 발령 100일 축하
+            </h1>
+            <p class="text-indigo-100 text-sm font-light">
+                거친 대인수 학급의 파도를 넘은 당신, 이미 프로 교사입니다!
+            </p>
+        </div>
+
+        <!-- 탭 메뉴 내비게이션 -->
+        <div class="flex border-b border-gray-100 bg-gray-50/50">
+            <button onclick="switchTab('letter')" id="tab-letter" class="flex-1 py-4 text-center text-sm font-medium text-gray-500 transition-all tab-active">
+                💌 위로의 편지
+            </button>
+            <button onclick="switchTab('subjects')" id="tab-subjects" class="flex-1 py-4 text-center text-sm font-medium text-gray-500 transition-all">
+                🏫 교과별 한마디
+            </button>
+            <button onclick="switchTab('kit')" id="tab-kit" class="flex-1 py-4 text-center text-sm font-medium text-gray-500 transition-all">
+                💊 생존 처방전
+            </button>
+        </div>
+
+        <!-- 탭 콘텐츠 본문 -->
+        <div class="p-6 md:p-8 min-h-[420px]">
+            
+            <!-- 1. 위로의 편지 탭 -->
+            <div id="content-letter" class="space-y-6">
+                <div class="border-l-4 border-indigo-500 pl-4 py-1">
+                    <p class="text-xs text-indigo-500 font-semibold uppercase tracking-wider">To. 강남·서초의 빛나는 신규 선생님들께</p>
+                    <h2 class="text-xl font-bold text-gray-800">우리가 함께 걸어온 위대한 100일</h2>
+                </div>
+
+                <div class="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
+                    <p>
+                        학급당 인원수 기본 30명 돌파, 눈이 번쩍 뜨이는 불타는 학구열, 그리고 숨 막히는 행정 업무까지... 
+                        남들보다 <strong>몇 배는 더 밀도 높은 하루</strong>를 보내며 드디어 <span class="text-indigo-600 font-bold">발령 100일</span>을 맞이하셨습니다! 정말 고생 많으셨습니다.
+                    </p>
+                    <p class="bg-gray-50 p-4 rounded-xl border border-gray-100 italic text-gray-700">
+                        "처음 교단에 서던 날의 떨림이 무색하게도, 쏟아지는 질문과 매시간 다른 에너지를 뿜어내는 아이들 틈바구니에서 정신없이 살아남은 지난 시간은 그 자체로 기적이자 감동입니다."
+                    </p>
+                    <p>
+                        전공 과목은 모두 다르지만, 교실 문을 열고 들어갈 때의 긴장감과 퇴근길 무거운 발걸음의 무게는 우리 모두 똑같을 것입니다. 
+                        서로가 서로의 버팀목이 되어주었기에 이 치열한 강남·서초의 한복판에서도 길을 잃지 않고 여기까지 올 수 있었습니다.
+                    </p>
+                    <p class="font-medium text-gray-800">
+                        선생님, 지금 충분히 잘하고 계십니다. 서툴렀던 첫 주의 모습은 잊어버리세요. 오늘 하루는 온전히 고생한 스스로를 안아주고 칭찬해 주는 따뜻한 날이 되기를 바랍니다. 💗
+                    </p>
+                </div>
+
+                <!-- 100일 달성 프로그레스 바 -->
+                <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100/50 mt-6">
+                    <div class="flex justify-between text-xs font-semibold text-indigo-700 mb-2">
+                        <span>초임 교사의 무한한 성장률</span>
+                        <span>100% 충전 완료!</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                        <div class="bg-indigo-600 h-3 rounded-full animate-pulse" style="width: 100%"></div>
+                    </div>
+                    <p class="text-center text-xs text-gray-500 mt-2">※ 이미 당신의 인내심과 학급 정리력은 완벽한 궤도에 올랐습니다.</p>
+                </div>
+            </div>
+
+            <!-- 2. 교과별 한마디 탭 -->
+            <div id="content-subjects" class="hidden space-y-6">
+                <div class="text-center mb-4">
+                    <p class="text-xs text-indigo-500 font-semibold">각자의 자리에서 빛나는 우리들</p>
+                    <h3 class="text-lg font-bold text-gray-800">교과별 재치 있는 100일 격려사</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 국어 -->
+                    <div class="p-4 rounded-2xl border border-gray-100 bg-red-50/50 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">📖</span>
+                            <h4 class="font-bold text-red-800 text-sm">국어과</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            아이들의 외계어와 과도한 신조어 속에서도 품격 있는 언어로 아름다운 소통을 완성해 오신 백일! 언어의 연금술사이십니다.
+                        </p>
+                    </div>
+
+                    <!-- 수학 -->
+                    <div class="p-4 rounded-2xl border border-gray-100 bg-blue-50/50 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">📐</span>
+                            <h4 class="font-bold text-blue-800 text-sm">수학과</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            '과밀 학급 30여 명'이라는 고차원 다인수 방정식을 사랑과 기하학적 인내심으로 완벽히 풀어내신 수리력에 찬사를 보냅니다!
+                        </p>
+                    </div>
+
+                    <!-- 영어 -->
+                    <div class="p-4 rounded-2xl border border-gray-100 bg-emerald-50/50 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">✈️</span>
+                            <h4 class="font-bold text-emerald-800 text-sm">영어과</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            정신없는 교실 환경 속에서도 "Attention, please!"를 유지하며 글로벌 마인드로 아이들을 품어내신 어메이징한 활약!
+                        </p>
+                    </div>
+
+                    <!-- 사회/역사 -->
+                    <div class="p-4 rounded-2xl border border-gray-100 bg-orange-50/50 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">🗺️</span>
+                            <h4 class="font-bold text-orange-800 text-sm">사회·역사과</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            강남·서초라는 척박하고 인구 밀도 높은 메가시티 속에서, 아이들과 평화로운 '사회적 대타협'을 매일같이 이뤄내신 협상의 달인!
+                        </p>
+                    </div>
+
+                    <!-- 과학 -->
+                    <div class="p-4 rounded-2xl border border-gray-100 bg-purple-50/50 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">🧪</span>
+                            <h4 class="font-bold text-purple-800 text-sm">과학과</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            끓는점 돌파 직전인 비글 같은 아이들의 에너지를 '평정심'이라는 강력한 촉매제를 사용해 아름다운 화학적 결합으로 안착시키셨습니다!
+                        </p>
+                    </div>
+
+                    <!-- 예체능/기타 -->
+                    <div class="p-4 rounded-2xl border border-gray-100 bg-pink-50/50 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-lg">🎨</span>
+                            <h4 class="font-bold text-pink-800 text-sm">예체능·기타 교과</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            방전 위기에 놓인 체력을 예술적 순발력과 강인한 철인 정신으로 승화시켜 교실에 늘 활기와 색채를 불어넣어 주신 에너지 보틀!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 생존 처방전 탭 -->
+            <div id="content-kit" class="hidden space-y-6 text-center">
+                <div class="mb-4">
+                    <p class="text-xs text-indigo-500 font-semibold">힘든 하루를 위로할 작은 유머</p>
+                    <h3 class="text-lg font-bold text-gray-800">오늘의 100일 생존 처방 캡슐</h3>
+                    <p class="text-xs text-gray-500 mt-1">버튼을 눌러 오늘 퇴근길에 필요한 비타민 같은 유머 처방을 받아보세요!</p>
+                </div>
+
+                <!-- 캡슐 박스 인터랙티브 영역 -->
+                <div class="bg-slate-50 border border-slate-200/60 rounded-3xl p-8 max-w-md mx-auto relative overflow-hidden">
+                    <div id="capsule-visual" class="text-6xl mb-4 transition-transform duration-300 transform pulse-soft">
+                        💊
+                    </div>
+                    
+                    <div id="prescription-output" class="min-h-[80px] flex flex-col justify-center">
+                        <p class="text-gray-400 text-sm italic">처방 캡슐을 열어보세요.</p>
+                    </div>
+
+                    <button onclick="getPrescription()" class="mt-6 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-xs font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-indigo-200 transition-all active:scale-95">
+                        💊 생존 처방 캡슐 개봉하기
+                    </button>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-4">
+                    *본 처방은 동료 교사들의 엄청난 유대감과 응원 기운을 가득 담아 조제되었습니다.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- 푸터 영역 -->
+        <div class="bg-gray-50 border-t border-gray-100 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-left">
+                <p class="text-xs text-gray-400">강남·서초지구 신규 교사 백일 축하 연대</p>
+                <p class="text-[10px] text-gray-300 mt-0.5">We are in this together, and you are doing amazing!</p>
+            </div>
+            <button onclick="triggerConfetti()" class="text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-xl transition-all shadow-sm active:scale-95">
+                🎉 축하 폭죽 터뜨리기
+            </button>
+        </div>
+
+    </div>
+
+    <!-- 스크립트 코드 -->
+    <script>
+        function switchTab(tabName) {
+            document.getElementById('content-letter').classList.add('hidden');
+            document.getElementById('content-subjects').classList.add('hidden');
+            document.getElementById('content-kit').classList.add('hidden');
+
+            document.getElementById('tab-letter').classList.remove('tab-active');
+            document.getElementById('tab-subjects').classList.remove('tab-active');
+            document.getElementById('tab-kit').classList.remove('tab-active');
+
+            if (tabName === 'letter') {
+                document.getElementById('content-letter').classList.remove('hidden');
+                document.getElementById('tab-letter').classList.add('tab-active');
+            } else if (tabName === 'subjects') {
+                document.getElementById('content-subjects').classList.remove('hidden');
+                document.getElementById('tab-subjects').classList.add('tab-active');
+            } else if (tabName === 'kit') {
+                document.getElementById('content-kit').classList.remove('hidden');
+                document.getElementById('tab-kit').classList.add('tab-active');
+            }
+        }
+
+        const prescriptions = [
+            {
+                title: "교장·교감 선생님의 프리패스 미소권",
+                desc: "결재 올릴 때마다 따뜻한 미소와 격려의 끄덕임만을 보장받는 신비한 아우라가 생성됩니다."
+            },
+            {
+                title: "학부모 무결점 민원 프리 실드",
+                desc: "민원 걱정 NO! 이번 주 내내 학부모님으로부터 오직 '선생님 감사합니다, 감동입니다' 메시지만 오게 만듭니다."
+            },
+            {
+                title: "급식 무제한 칼로리 소모 면제권",
+                desc: "오늘 먹은 급식은 고강도 에너지 소모로 인해 칼로리가 완전히 0kcal로 세팅됩니다. 맛있는 간식을 맘껏 즐기세요."
+            },
+            {
+                title: "행정 업무 자동 정렬 시스템",
+                desc: "나이스(NEIS)와 에듀파인이 선생님의 퇴근 마인드를 인식하여 마법처럼 결재 대기를 순식간에 비워줍니다."
+            },
+            {
+                title: "교실 침묵의 10분 마법권",
+                desc: "아이들이 갑자기 자리에 앉아 10분간 독서 혹은 사색에 잠기게 만드는 마법 같은 소음 제어 능력이 샘솟습니다."
+            },
+            {
+                title: "동료 선생님의 '커피 수송대' 급습",
+                desc: "당신이 가장 지친 타이밍에 동료 선생님이 정확히 '아이스 아메리카노(혹은 최애 음료)'를 들고 문을 두드립니다."
+            }
+        ];
+
+        const capsuleEmojis = ["💊", "🎁", "⭐", "🔮", "🍀", "💎"];
+
+        function getPrescription() {
+            const visual = document.getElementById('capsule-visual');
+            const output = document.getElementById('prescription-output');
+            
+            visual.classList.remove('pulse-soft');
+            visual.classList.add('animate-bounce');
+            
+            output.innerHTML = `
+                <p class="text-indigo-500 font-medium text-sm animate-pulse">처방전을 신속하게 조제하고 있습니다...</p>
+            `;
+
+            setTimeout(() => {
+                visual.classList.remove('animate-bounce');
+                visual.classList.add('pulse-soft');
+                
+                const randomEmoji = capsuleEmojis[Math.floor(Math.random() * capsuleEmojis.length)];
+                visual.textContent = randomEmoji;
+
+                const result = prescriptions[Math.floor(Math.random() * prescriptions.length)];
+                output.innerHTML = `
+                    <h4 class="text-indigo-600 font-bold text-base md:text-lg mb-1">${result.title}</h4>
+                    <p class="text-gray-600 text-xs md:text-sm leading-relaxed">${result.desc}</p>
+                `;
+                
+                // 처방 성공 시 축하 꽃가루 터뜨리기
+                createConfettiParticles(25);
+            }, 600);
+        }
+
+        // 고성능 입체 Confetti 생성기
+        function createConfettiParticles(count) {
+            const colors = ['#4f46e5', '#818cf8', '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#f43f5e', '#a855f7'];
+            const shapes = ['50%', '0%']; // 원형과 사각형 혼합
+            
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // 크기 및 형태 설정 (JS에서 직접 처리하여 CSS 애니메이션 충돌 방지)
+                const width = Math.random() * 8 + 6; // 6px ~ 14px
+                const height = Math.random() * 8 + 6;
+                confetti.style.width = `${width}px`;
+                confetti.style.height = `${height}px`;
+                confetti.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
+                
+                // 색상 및 위치
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = `${Math.random() * 100}vw`;
+                
+                // 떨어지는 시간과 좌우 흔들림 딜레이 무작위 설정
+                const duration = Math.random() * 2.5 + 2; // 2s ~ 4.5s
+                const delay = Math.random() * 0.4;
+                confetti.style.animation = `fall-and-sway ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                // 애니메이션이 끝나면 DOM에서 요소를 깔끔하게 제거
+                setTimeout(() => {
+                    confetti.remove();
+                }, (duration + delay) * 1000);
+            }
+        }
+
+        function triggerConfetti() {
+            createConfettiParticles(100);
+        }
+
+        // 페이지 진입 후 0.4초 뒤에 첫 폭죽 축하 세레머니 가동
+        window.onload = function() {
+            setTimeout(() => {
+                triggerConfetti();
+            }, 400);
+        };
+    </script>
+</body>
+</html>
